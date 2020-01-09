@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="baizhi.jhy.dao.ArticleDao">
+    <select id="selectPage" resultType="Article">
+        select * from article limit ${(pageNow-1)*pageSize},#{pageSize}
+    </select>
+    <select id="selectTotalCount" resultType="java.lang.Integer">
+        select count(*) from article
+    </select>
+    <insert id="addArticle">
+        insert into article values(#{id},#{title},#{img},#{content},#{createDate},#{publishDate},#{status},#{guruId})
+    </insert>
+    <delete id="deleteArticle">
+        delete from article where id=#{id}
+    </delete>
+    <update id="updateArticle">
+        update article
+        <set>
+            <if test="title!=null">
+                title=#{title},
+            </if>
+            <if test="img!=null">
+                img=#{img},
+            </if>
+            <if test="content!=null">
+                content=#{content},
+            </if>
+            <if test="createDate!=null">
+                createDate=#{createDate},
+            </if>
+            <if test="publishDate!=null">
+                publishDate=#{publishDate},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+            <if test="guruId!=null">
+                guruId=#{guruId},
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+    <select id="selectByOne" resultType="Article">
+        select * from article where id=#{id}
+    </select>
+    <select id="selectArticleDate" resultType="Article">
+        select * from article order by createDate desc limit 0,2
+    </select>
+</mapper>

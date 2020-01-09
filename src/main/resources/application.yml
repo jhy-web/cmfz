@@ -1,0 +1,35 @@
+#服务器相关
+server:
+  port: 8888
+  servlet:
+    context-path: /cmfz
+    jsp:
+      init-parameters:
+        development: true
+#数据源
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 123
+    url: jdbc:mysql://localhost:3306/cmfz
+  #视图解析器
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+#mybatis
+mybatis:
+  type-aliases-package: baizhi.jhy.entity
+  mapper-locations: classpath:baizhi/jhy/mapper/*DaoMapper.xml
+logging:
+  level:
+    baizhi.jhy.dao: debug
